@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Product Page - Futuristic Store</title>
+    
+    <!-- Bootstrap 5 CSS - Framework for responsive design -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons - For cart and other icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section with Cart Badge -->
+    <header class="header-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="mb-0"><i class="bi bi-shop"></i> E-COMMERCE</h1>
+                <div class="cart-info">
+                    <button class="btn btn-light position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+                        <i class="bi bi-cart3 fs-4"></i>
+                        <!-- Cart item count badge -->
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">0</span>
+                    </button>
+                    <div class="mt-2">
+                        Total: ₹<span id="total-price">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container my-4">
+        
+        <!-- Filters and Sorting Section -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="filter-section">
+                    <label class="form-label fw-bold">Category Filter:</label>
+                    <!-- Dropdown to filter products by category -->
+                    <select class="form-select select-box" id="category-filter" onchange="filterAndSortProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="home">Home</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="sort-section">
+                    <label class="form-label fw-bold">Sort by Price:</label>
+                    <!-- Dropdown to sort products by price -->
+                    <select class="form-select select-box" id="price-sort" onchange="filterAndSortProducts()">
+                        <option value="default">Default</option>
+                        <option value="low-to-high">Low to High</option>
+                        <option value="high-to-low">High to Low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid - Products will be inserted here dynamically by JavaScript -->
+        <div class="row products-grid" id="products-container">
+            <!-- Products will be added here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar (Offcanvas) - Slides in from right side -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">SHOPPING CART</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Cart items will be inserted here by JavaScript -->
+            <div id="cart-items">
+                <p class="text-center text-muted">Your cart is empty</p>
+            </div>
+            
+            <!-- Cart Total Section -->
+            <div class="cart-footer mt-4">
+                <div class="d-flex justify-content-between mb-3">
+                    <h5>Total:</h5>
+                    <h5>₹<span id="cart-total">0</span></h5>
+                </div>
+                <button class="btn btn-success w-100 btn-lg" onclick="initiatePayment()">
+                    <i class="bi bi-credit-card"></i> Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Product Image Gallery -->
+    <div class="modal fade" id="galleryModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-product-name">Product Gallery</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Bootstrap Carousel for image gallery -->
+                    <div id="galleryCarousel" class="carousel slide" data-bs-ride="false">
+                        <div class="carousel-inner" id="carousel-images">
+                            <!-- Images will be inserted here by JavaScript -->
+                        </div>
+                        <!-- Previous button for carousel -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <!-- Next button for carousel -->
+                        <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                    <!-- Thumbnail images for quick navigation -->
+                    <div class="d-flex justify-content-center flex-wrap mt-3 gap-2" id="thumbnail-container">
+                        <!-- Thumbnails will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Razorpay Payment Gateway Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <!-- Bootstrap 5 JavaScript Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
